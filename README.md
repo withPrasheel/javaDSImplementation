@@ -291,4 +291,172 @@ public class Test {
 }
 ```
 -------
-## 
+## Binary Tree
+
+```java
+  class Node
+{
+    int key;
+    Node left, right;
+ 
+    public Node(int item)
+    {
+        key = item;
+        left = right = null;
+    }
+}
+ 
+// A Java program to introduce Binary Tree
+class BinaryTree
+{
+    // Root of Binary Tree
+    Node root;
+ 
+    // Constructors
+    BinaryTree(int key)
+    {
+        root = new Node(key);
+    }
+ 
+    BinaryTree()
+    {
+        root = null;
+    }
+ 
+    public static void main(String[] args)
+    {
+        BinaryTree tree = new BinaryTree();
+ 
+        /*create root*/
+        tree.root = new Node(1);
+ 
+        /* following is the tree after above statement
+ 
+              1
+            /   \
+          null  null     */
+ 
+        tree.root.left = new Node(2);
+        tree.root.right = new Node(3);
+ 
+        /* 2 and 3 become left and right children of 1
+               1
+            /     \
+          2        3
+        /   \     /  \
+      null null null null  */
+ 
+ 
+        tree.root.left.left = new Node(4);
+        /* 4 becomes left child of 2
+                    1
+                /       \
+               2          3
+             /   \       /  \
+            4    null  null  null
+           /   \
+          null null
+         */
+    }
+}
+```
+
+
+## Binary Search Tree
+### Search
+```java 
+  public Node search(Node root, int key)
+{
+    // Base Cases: root is null or key is present at root
+    if (root==null || root.key==key)
+        return root;
+ 
+    // Key is greater than root's key
+    if (root.key < key)
+       return search(root.right, key);
+ 
+    // Key is smaller than root's key
+    return search(root.left, key);
+}
+```
+### Insertion and Traversal
+```java
+  class BinarySearchTree {
+    Node root;
+    
+    class Node
+    {
+        int key;
+        Node left, right;
+ 
+        public Node(int item)
+        {
+            key = item;
+            left = right = null;
+        }
+    }
+    
+ 
+    // Constructor
+    BinarySearchTree()
+    {
+         root = null;
+    }
+ 
+    // This method mainly calls insertRec()
+    void insert(int key)
+    {
+         root = insertRec(root, key);
+    }
+    Node insertRec(Node root, int key)
+    {
+        if (root == null)
+        {
+            root = new Node(key);
+            return root;
+        }
+        if (key < root.key)
+            root.left = insertRec(root.left, key);
+        else if (key > root.key)
+            root.right = insertRec(root.right, key);
+        return root;
+    }
+
+    void inorder()
+    {
+         inorderRec(root);
+    }
+ 
+    void inorderRec(Node root)
+    {
+        if (root != null) {
+            inorderRec(root.left);
+            System.out.println(root.key);
+            inorderRec(root.right);
+        }
+    }
+ 
+    // Driver Code
+    public static void main(String[] args)
+    {
+        BinarySearchTree tree = new BinarySearchTree();
+ 
+        /* Let us create following BST
+              50
+           /     \
+          30      70
+         /  \    /  \
+       20   40  60   80 */
+        tree.insert(50);
+        tree.insert(30);
+        tree.insert(20);
+        tree.insert(40);
+        tree.insert(70);
+        tree.insert(60);
+        tree.insert(80);
+ 
+        // print inorder traversal of the BST
+        tree.inorder();
+    }
+}
+```
