@@ -735,4 +735,89 @@ public class PQHeap {
 }
 ```
 --------
+## Trie 
+
+```java
+    
+    public class Trie {
+	  static final int ALPHABET_SIZE = 26;
+	  static TrieNode root;
+	
+	  static class TrieNode
+	  {
+		  TrieNode[] children = new TrieNode[ALPHABET_SIZE];
+		  boolean isEndOfWord;
+		
+		  TrieNode(){
+			  isEndOfWord = false;
+			  for (int i = 0; i < ALPHABET_SIZE; i++)
+				  children[i] = null;
+		  }
+	  };
+	
+	
+	  static void insert(String key)
+	  {
+		  TrieNode curr = root;
+      for(int i=0;i<key.length();i++){
+          if(curr.children[key.charAt(i)-'a']==null){
+              curr.children[key.charAt(i)-'a'] = new TrieNode();
+          }
+          curr = curr.children[key.charAt(i)-'a'];
+      }
+      curr.isEndOfWord = true;
+	  }
+  
+	
+	static boolean search(String key)
+	{
+		TrieNode curr = root;
+    for(int i=0;i<key.length();i++){
+        if(curr.children[key.charAt(i)-'a']!=null){
+            curr = curr.children[key.charAt(i)-'a'];
+        }
+        else
+        return false;
+    }
+    return curr.isEndOfWord;
+	}
+	
+	// Driver
+	public static void main(String args[])
+	{
+		String keys[] = {"the", "a", "there", "answer", "any",
+						"by", "bye", "their"};
+	
+		String output[] = {"Not present in trie", "Present in trie"};
+	
+	
+		root = new TrieNode();
+	
+		// Construct trie
+		int i;
+		for (i = 0; i < keys.length ; i++)
+			insert(keys[i]);
+	
+		// Search for different keys
+		if(search("the") == true)
+			System.out.println("the --- " + output[1]);
+		else System.out.println("the --- " + output[0]);
+		
+		if(search("ths") == true)
+			System.out.println("these --- " + output[1]);
+		else System.out.println("these --- " + output[0]);
+		
+		if(search("their") == true)
+			System.out.println("their --- " + output[1]);
+		else System.out.println("their --- " + output[0]);
+		
+		if(search("thaw") == true)
+			System.out.println("thaw --- " + output[1]);
+		else System.out.println("thaw --- " + output[0]);
+		
+	}
+}
+
+```
+------
 Heap and Graph left and Tries
