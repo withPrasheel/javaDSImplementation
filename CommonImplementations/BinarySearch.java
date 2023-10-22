@@ -11,4 +11,4 @@ public int search(int[] nums, int target) {
                 start = mid+1;
         }
         return -1;
-    }
+}
